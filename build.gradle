@@ -1,0 +1,45 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = 'com.mitosis.kafkaApp.Application'
+
+ext {
+    springKafkaVersion = "1.1.2.RELEASE"
+    springBootVersion = "2.0.0.BUILD-SNAPSHOT"
+    reactorVersion = '3.0.4.RELEASE'
+    zooKeeperVersion = '3.4.9'
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url 'http://repo.spring.io/milestone' }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.0.0.BUILD-SNAPSHOT"
+    }
+}
+
+jar {
+    baseName = 'mitosis-kafka-app'
+    version =  '1.0.0-alpha.0'
+}
+
+repositories {
+    jcenter()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("io.projectreactor:reactor-core:$reactorVersion")
+    compile("org.springframework.kafka:spring-kafka:$springKafkaVersion")
+    
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
